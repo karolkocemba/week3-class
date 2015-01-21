@@ -34,10 +34,10 @@ def use_secret_encoder(plain_text):
 def wrap_encoded(encoded_text):
 	wrapped_message = ""
 	for letter in encoded_text:
-		if ord(letter) > 90 and ord(letter) <=93:
+		if ord(letter) > 90 and ord(letter) < 94:
 			letter = chr(ord(letter)-26)
 			wrapped_message +=letter
-		if ord(letter) > 122:
+		elif ord(letter) > 122:
 			letter = chr(ord(letter)-26)
 			wrapped_message += letter
 		else:
