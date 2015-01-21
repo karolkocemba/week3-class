@@ -28,11 +28,25 @@ def use_secret_encoder(plain_text):
   for letter in plain_text:
     new_letter = chr(ord(letter) + 3)
     encoded_message += new_letter
+
   return encoded_message
 
-def use_secret_decoder(encoded_text):
+def wrap_encoded(encoded_text):
+	wrapped_message = ""
+	for letter in encoded_text:
+		if ord(letter) > 90 and ord(letter) <=93:
+			letter = chr(ord(letter)-26)
+			wrapped_message +=letter
+		if ord(letter) > 122:
+			letter = chr(ord(letter)-26)
+			wrapped_message += letter
+		else:
+			wrapped_message += letter
+	return wrapped_message
+
+def use_secret_decoder(wrapped_text):
   cipher_text = ""
-  for letter in encoded_text:
+  for letter in wrapped_text:
   	new_letter = chr(ord(letter) - 3)
   	cipher_text += new_letter
   return cipher_text
@@ -40,7 +54,8 @@ def use_secret_decoder(encoded_text):
 
 message_to_be_encoded = input("What message do you want to send? ")
 encrypted_message = use_secret_encoder(message_to_be_encoded)
-print("Here's the encrypted version: ", encrypted_message)
+wrapped_text = wrap_encoded(encrypted_message)
+print("Here's the encrypted version: ", wrapped_text)
 
 plain_message = use_secret_decoder(encrypted_message)
 print("Here's your original message: ", plain_message)
